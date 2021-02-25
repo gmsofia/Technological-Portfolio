@@ -1,0 +1,185 @@
+import turtle
+import random
+
+s = turtle.Screen()
+
+s.bgcolor("pink")
+s.title("Carrera de Tortugas")
+
+#Main characters
+t1 = turtle.Turtle()
+t1.hideturtle()
+t1.shape("turtle")
+t1.color ("green")
+t1.shapesize(1.2,1.2,1.2)
+t1.pensize(3)
+
+t2 = turtle.Turtle()
+t2.hideturtle()
+t2.shape("turtle")
+t2.color("brown")
+t2.shapesize(1.2,1.2,1.2)
+t2.pensize(3)
+
+#Extras' appearance
+ta = turtle.Turtle()
+ta.hideturtle()
+ta.shape("turtle")
+ta.color("grey")
+ta.shapesize(2,2,2)
+
+tb = turtle.Turtle()
+tb.hideturtle()
+tb.shape("turtle")
+tb.color("purple")
+tb.shapesize(2,2,2)
+
+tc = turtle.Turtle()
+tc.hideturtle()
+tc.shape("turtle")
+tc.color("black")
+tc.shapesize(2,2,2)
+
+td = turtle. Turtle()
+td.hideturtle()
+td.shape("turtle")
+td.color("white")
+td.shapesize(2,2,2)
+
+te = turtle.Turtle()
+te.hideturtle()
+te.shape("turtle")
+te.color("purple")
+te.shapesize(2,2,2)
+
+tf = turtle.Turtle()
+tf.hideturtle()
+tf.shape("turtle")
+tf.color("black")
+tf.shapesize(2,2,2)
+
+tg = turtle.Turtle()
+tg.hideturtle()
+tg.shape("turtle")
+tg.color("white")
+tg.shapesize(2,2,2)
+
+th = turtle. Turtle()
+th.hideturtle()
+th.shape("turtle")
+th.color("gray")
+th.shapesize(2,2,2)
+
+#Extras action
+ta.showturtle()
+ta.penup()
+ta.rt(90)
+ta.goto (-260, 250)
+
+tb.showturtle()
+tb.penup()
+tb.rt(90)
+tb.goto (-80, 250)
+
+tc.showturtle()
+tc.penup()
+tc.rt(90)
+tc.goto (90, 250)
+
+td.showturtle()
+td.penup()
+td.rt(90)
+td.goto (250, 250)
+
+te.showturtle()
+te.penup()
+te.lt(90)
+te.goto (-260, -250)
+
+tf.showturtle()
+tf.penup()
+tf.lt(90)
+tf.goto (-80, -250)
+
+tg.showturtle()
+tg.penup()
+tg.lt(90)
+tg.goto (90, -250)
+
+th.showturtle()
+th.penup()
+th.lt(90)
+th.goto (250, -250)
+
+#Main Action
+
+t1.penup()
+t1.goto(300,100)
+t1.pendown()
+t1.circle(30)
+t2.penup()
+t2.goto(300,-100)
+t2.pendown()
+t2.circle(30)
+
+t1.penup()
+t2.penup()
+t1.goto(-300,130)
+t1.showturtle()
+t2.goto(-300,-70)
+t2.showturtle()
+t1.pendown()
+t2.pendown()
+
+dado = [1,2,3,4]
+
+for i in range(20):
+    if t1.pos() >= (250,100):
+        print("GREEN TURTLE has won!!")
+        t1.rt(90)
+        t1.rt(90)
+        t1.rt(90)
+        t1.rt(90)
+        ta.rt(90)
+        ta.lt(180)
+        ta.rt(90)
+        tb.rt(90)
+        tb.lt(180)
+        tb.rt(90)
+        tc.rt(90)
+        tc.lt(180)
+        tc.rt(90)
+        td.rt(90)
+        td.lt(180)
+        td.rt(90)
+        break
+    elif t2.pos() >= (250,-100):
+        print("BROWN TURTLE has won!!")
+        t2.rt(90)
+        t2.rt(90)
+        t2.rt(90)
+        t2.rt(90)
+        te.rt(90)
+        te.lt(180)
+        te.rt(90)
+        tf.rt(90)
+        tf.lt(180)
+        tf.rt(90)
+        tg.rt(90)
+        tg.lt(180)
+        tg.rt(90)
+        th.rt(90)
+        th.lt(180)
+        th.rt(90)
+        break
+    else:
+        turnoverde = input("Press 'enter' to advance, GREEN TURTLE.")
+        turno1 = random.choice(dado)*30
+        print("You advance {} steps.".format(turno1))
+        t1.fd(turno1)
+        turnomarron = input("Press 'enter' to advance, BROWN TURTLE.")
+        turno2 = random.choice(dado)*30
+        print("You advance {} steps.".format(turno2))
+        t2.fd(turno2)
+
+turtle.done()
