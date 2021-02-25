@@ -1,0 +1,155 @@
+import turtle
+import time
+import random
+
+
+delay = 0.1
+#Screen
+s = turtle.Screen()
+s.setup(750,750)
+s.bgcolor('green')
+s.title("Forest Worm")
+
+marcador = 0
+marcador_alto = 0
+
+texto = turtle.Turtle()
+texto.speed(0)
+texto.color('white')
+texto.penup()
+texto.hideturtle()
+texto.goto(0,300)
+texto.write("Score: 0\t High Score: 0", align='center', font=("Comic Sans MS", 24,'normal'))
+
+
+#Character
+gusanito = turtle.Turtle()
+gusanito.speed(1.3)
+gusanito.shape('square')
+gusanito.shapesize(0.75,0.75,0.75)
+gusanito.color('brown')
+gusanito.penup()
+gusanito.home()
+gusanito.direction = 'stop'
+
+
+cuerpo = []
+
+
+manzanitas = turtle.Turtle()
+manzanitas.shape('circle')
+manzanitas.color('red')
+manzanitas.shapesize(1,1,1)
+manzanitas.penup()
+manzanitas.goto(0,100)
+manzanitas.speed(0)
+
+#Defs to assign keys later
+
+def arriba():
+    gusanito.direction = 'up'
+
+def abajo():
+    gusanito.direction = 'down'
+
+def derecha():
+    gusanito.direction = 'right'
+
+def izquierda():
+    gusanito.direction = 'left'
+
+def movimiento():
+    if gusanito.direction == 'up':
+        y = gusanito.ycor()
+        gusanito.sety(y + 20)
+    elif gusanito.direction == 'down':
+        y = gusanito.ycor()
+        gusanito.sety(y - 20)
+    elif gusanito.direction == 'left':
+        x = gusanito.xcor()
+        gusanito.setx(x - 20)
+    elif gusanito.direction == 'right':
+        x = gusanito.xcor()
+        gusanito.setx(x + 20)
+
+
+#Assigning Keys
+s.listen() 
+s.onkeypress(arriba, "Up")
+s.onkeypress(abajo, "Down")
+s.onkeypress(derecha, "Right")
+s.onkeypress(izquierda, "Left")
+
+
+while True:
+    s.update()
+
+    if gusanito.xcor() > 340 or gusanito.xcor() < -340 or gusanito.ycor() > 340 or gusanito.ycor() < -340:
+        time.sleep(1)
+        for i in cuerpo:
+            i.clear()
+            i.hideturtle()
+        gusanito.hideturtle()
+        gusanito.home()
+        gusanito.showturtle()
+        gusanito.direction = 'stop'
+        cuerpo.clear()
+
+        marcador = 0
+        texto.clear()
+        texto.write("Score: {}\t High Score: {}".format(marcador,marcador_alto), align='center', font=("Comic Sans MS", 24, "normal"))
+
+
+    if gusanito.distance(manzanitas) < 20:
+        x = random.randint(-275,275)
+        y = random.randint(-275,275)
+        manzanitas.goto(x,y)
+        #Body
+        nuevo_cuerpo = turtle.Turtle()
+        nuevo_cuerpo.shape('square')
+        nuevo_cuerpo.shapesize(0.75,0.75,0.75)
+        nuevo_cuerpo.color('brown')
+        nuevo_cuerpo.penup()
+        nuevo_cuerpo.goto(0,0)
+        nuevo_cuerpo.speed(0)
+        cuerpo.append(nuevo_cuerpo)
+
+        marcador += 10
+        if marcador >= marcador_alto:
+            marcador_alto = marcador
+        texto.clear()
+        texto.write("Score: {}\t High Score: {}".format(marcador,marcador_alto), align='center', font=("Comic Sans MS", 24, "normal"))
+
+    total = len(cuerpo)
+    for index in range(total -1,0,-1):
+        x = cuerpo[index-1].xcor()
+        y = cuerpo[index-1].ycor()
+        cuerpo[index].goto(x,y)
+
+    if total > 0 :
+        x = gusanito.xcor()
+        y = gusanito.ycor()
+        cuerpo[0].goto(x,y)
+
+    movimiento()
+
+    for i in cuerpo:
+        if i.distance(gusanito) < 20:
+            time.sleep(1)
+            for i in cuerpo:
+                i.clear()
+                i.hideturtle()
+            gusanito.hideturtle()
+            gusanito.home()
+            gusanito.showturtle()
+            gusanito.direction = 'stop'
+            cuerpo.clear()
+
+            marcador = 0
+            texto.clear()
+            texto.write("Score: {}\t High Score: {}".format(marcador,marcador_alto), align='center', font=("Comic Sans MS", 24, "normal"))
+            
+
+    time.sleep(delay) #sleep es para hacer efectivo el delay, la cantidad que escribamos en la variable.
+
+turtle.done()
